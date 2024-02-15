@@ -12,6 +12,7 @@
           - ca-certificates
           - curl
           - gnupg
+          - python3-pip
         update-cache: true
         cache_valid_time: 86400
     - name: Создание директории для хранения ключа Docker
@@ -20,10 +21,10 @@
         state: directory
         mode: "0755"
     - name: Добавление ключа Docker
-      ansible.builtin.get_url:
+      ansible.builtin.apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
-        dest: /etc/apt/keyrings/docker.asc
-        mode: "0755"
+        keyring: /etc/apt/keyrings/docker.asc
+        state: present
     - name: Установка стабильного репозитория
       ansible.builtin.apt_repository:
         repo: >
@@ -46,6 +47,14 @@
         name: docker
         state: restarted
         enabled: true
+- name: Настройка дополнительных пакетов python
+  become: true
+  block:
+    - name: Установка pip пакетов
+      ansible.builtin.pip:
+        name: docker
+    - name: Перезагрузка системв
+      ansible.builtin.reboot:
 - name: Завершение установки
   become: true
   block:

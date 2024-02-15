@@ -1,6 +1,10 @@
-[cluster]
+[deploy]
 demo1 ansible_host=127.0.0.1 ansible_user=ayushcode ansible_port=2223
+
+[managers]
 demo2 ansible_host=127.0.0.1 ansible_user=ayushcode ansible_port=2224
 demo3 ansible_host=127.0.0.1 ansible_user=ayushcode ansible_port=2225
+
+[workers]
 demo4 ansible_host=127.0.0.1 ansible_user=ayushcode ansible_port=2226
 demo5 ansible_host=127.0.0.1 ansible_user=ayushcode ansible_port=2227

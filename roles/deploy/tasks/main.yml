@@ -1,5 +1,0 @@
----
-- name: Demo
-  ansible.builtin.command: echo "DEMO"
-  register: my_output
-  changed_when: my_output.rc != 0
