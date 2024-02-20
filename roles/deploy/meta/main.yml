@@ -1,6 +1,7 @@
 ---
 galaxy_info:
-  description: Настройка серверов для работы с Docker
+  role_name: deploy
+  description: Выкладка микросервисов на docker кластер
   author: Anton
   license: MIT
   min_ansible_version: "2.9"

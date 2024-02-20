@@ -1,0 +1,4 @@
+---
+deploy_services:
+  - api
+deploy_network_name: app_network

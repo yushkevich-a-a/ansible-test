@@ -1,0 +1,21 @@
+---
+- name: Конфигурирование секрета {{ name_item }}
+  include_tasks: ../secret.yml
+
+- name: "[{{ name_item }}] Выкладка сервиса"
+  block:
+    - name: "[{{ name_item }}] выкладываем сервис"
+      community.docker.docker_swarm_service:
+        name: "{{ name_item }}"
+        image: 192.168.56.11:5000/{{ name_item }}:latest
+        state: present
+        networks:
+          - name: "{{ deploy_network_name }}"
+        publish:
+          - mode: ingress
+            protocol: tcp
+            published_port: 3002
+            target_port: 3000
+        secrets:
+          - secret_name: "{{ name_item }}.env"
+            filename: /opt/app/.env
